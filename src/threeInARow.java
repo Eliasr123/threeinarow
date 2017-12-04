@@ -1,17 +1,13 @@
-
-
 import java.util.Scanner;
 class ThreeInARow {
     private static char[] grid = {'|', '1', '2', '3', '|',
                                  'A', '-', '-', '-', '|',
                                  'B', '-', '-', '-', '|',
                                  'C', '-', '-', '-', '|'};
-    private static char[] inputArray = {' ',' '};
+    private static char[] inputArray = {,};
     private static String inputPos;
     private static byte player = 0;
- //   private static boolean valid = false;
     private static boolean gameOver = false;
-
     private static int pos = 0;
 
     public static void main(String[] args) {
@@ -21,9 +17,9 @@ class ThreeInARow {
             inputPos = input();
 
             inputArray = inputPos.toCharArray();
-
             calcPos();
-          boolean valid = validator();
+            boolean valid = validator();
+
             if(valid) {
                 placeTile();
                 checkWinner();
@@ -31,8 +27,6 @@ class ThreeInARow {
                 else if (player == 1) player = 0;
                 System.out.print("\n\n\n\n\n\n\n\n");
                 printArray();
-
-
             }
             if (!(new String(grid).contains("-"))) {
                 gameOver = true;
@@ -57,13 +51,7 @@ class ThreeInARow {
 
             if (i == 4 || i == 9 || i == 14 || i == 19) {
                 System.out.print("\n");
-
-
             }
-
-
-
-
         }
        // System.out.print(out); // debugging for number of possible placements until draw.
         if(out == 0) gameOver = true;
@@ -82,14 +70,10 @@ class ThreeInARow {
 
     }
     private static boolean validator() {
-        boolean valid;
+        boolean valid = false;
         if(inputPos.length() == 2 && grid[pos] == '-') {
             valid = true;
         }
-        else if(inputPos.length() == 1) {
-            valid = false;
-        }
-        else valid = false;
         return valid;
     }
     private static void placeTile() {
@@ -102,16 +86,18 @@ class ThreeInARow {
        // System.out.print(pos); // for debugging
     }
     private static void calcPos() {
+        if (inputPos.length() == 2) {
+            if (inputArray[0] == 'a') {
+                pos = 5 + Character.getNumericValue(inputArray[1]);
 
-        if(inputArray[0] == 'a') {
-            pos = 5 + Character.getNumericValue(inputArray[1]);
-
+            } else if (inputArray[0] == 'b') {
+                pos = 10 + Character.getNumericValue(inputArray[1]);
+            } else if (inputArray[0] == 'c') {
+                pos = 15 + Character.getNumericValue(inputArray[1]);
+            }
         }
-        else if(inputArray[0] == 'b') {
-            pos = 10 + Character.getNumericValue(inputArray[1]);
-        }
-        else if(inputArray[0] == 'c') {
-            pos = 15 + Character.getNumericValue(inputArray[1]);
+        else {
+            pos = 1;
         }
 
     }
